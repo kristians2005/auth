@@ -1,6 +1,6 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
-import { usePage } from '@inertiajs/vue3';
+import { usePage, router } from '@inertiajs/vue3';
 
 defineProps({
     blogs: Array,
@@ -9,8 +9,11 @@ defineProps({
 // const page = usePage();
 // console.log(page.props.blogs);
 
-
-
+const deleteBlog = (id) => {
+    if (confirm('Are you sure you want to delete this blog post?')) {
+        router.delete(route('blogs.destroy', id));
+    }
+};
 </script>
 
 <template>
@@ -20,9 +23,9 @@ defineProps({
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     Blog Posts
                 </h2>
-                <button class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-150">
+                <a :href="route('blogs.create')" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-150">
                     Create New Post
-                </button>
+                </a>
             </div>
         </template>
 
@@ -46,7 +49,10 @@ defineProps({
                                             <p class="text-sm font-medium text-gray-900">{{ blog.author }}</p>
                                         </div>
                                     </div>
-                                    <button class="text-indigo-600 hover:text-indigo-900 font-medium">Read more →</button>
+                                    <div class="flex items-center space-x-4">
+                                        <a :href="route('blogs.edit', blog.id)" class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</a>
+                                        <button @click="deleteBlog(blog.id)" class="text-red-600 hover:text-red-900 font-medium">Delete</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
