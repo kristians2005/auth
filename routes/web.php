@@ -19,13 +19,6 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-
-
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
-
-
     Route::middleware(Roles::class . ':admin')->group(function () {
         Route::get('/admin', function () {
             return Inertia::render('Admin');
@@ -33,7 +26,6 @@ Route::middleware([
     });
 
     Route::resource('blogs', BlogController::class);
-
 });
 
 
