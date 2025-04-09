@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Middleware\Roles;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -22,3 +23,12 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+Route::middleware(Roles::class . ':admin')->group(function () {
+    Route::get('/admin', function () {
+        return Inertia::render('Admin');
+    })->name('admin');
+});
+
+
+
