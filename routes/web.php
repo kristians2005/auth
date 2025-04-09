@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Middleware\Roles;
 use App\Http\Controllers\BlogController;
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -26,6 +27,7 @@ Route::middleware([
     });
 
     Route::resource('blogs', BlogController::class);
+    Route::get('/my-blogs', [BlogController::class, 'myBlogs'])->name('blogs.my');
 });
 
 

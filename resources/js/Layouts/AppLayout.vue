@@ -47,7 +47,10 @@ const logout = () => {
                         <!-- Navigation Links -->
                         <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                             <NavLink :href="route('blogs.index')" :active="route().current('blogs.index')">
-                                Blogs
+                                All Blogs
+                            </NavLink>
+                            <NavLink :href="route('blogs.my')" :active="route().current('blogs.my')">
+                                My Blogs
                             </NavLink>
                             <NavLink v-if="$page.props.auth.user.role === 'admin'" :href="route('admin')" :active="route().current('admin')">
                                 Admin
@@ -111,7 +114,10 @@ const logout = () => {
             <div :class="{'block': showingNavigationDropdown, 'hidden': ! showingNavigationDropdown}" class="sm:hidden">
                 <div class="pt-2 pb-3 space-y-1">
                     <ResponsiveNavLink :href="route('blogs.index')" :active="route().current('blogs.index')">
-                        Blogs
+                        All Blogs
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink :href="route('blogs.my')" :active="route().current('blogs.my')">
+                        My Blogs
                     </ResponsiveNavLink>
                     <ResponsiveNavLink v-if="$page.props.auth.user.role === 'admin'" :href="route('admin')" :active="route().current('admin')">
                         Admin

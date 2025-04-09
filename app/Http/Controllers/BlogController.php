@@ -18,6 +18,15 @@ class BlogController extends Controller
     }
 
     /**
+     * Display user's own blog posts.
+     */
+    public function myBlogs()
+    {
+        $blogs = Blog::where('user_id', auth()->id())->get();
+        return Inertia::render('Blogs/MyBlogs', ['blogs' => $blogs]);
+    }
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
