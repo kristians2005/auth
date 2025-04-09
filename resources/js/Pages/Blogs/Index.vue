@@ -49,7 +49,7 @@ const deleteBlog = (id) => {
                                             <p class="text-sm font-medium text-gray-900">{{ blog.author }}</p>
                                         </div>
                                     </div>
-                                    <div class="flex items-center space-x-4">
+                                    <div v-if="blog.user_id === $page.props.auth.user.id || $page.props.auth.user.role === 'admin'" class="flex items-center space-x-4">
                                         <a :href="route('blogs.edit', blog.id)" class="text-indigo-600 hover:text-indigo-900 font-medium">Edit</a>
                                         <button @click="deleteBlog(blog.id)" class="text-red-600 hover:text-red-900 font-medium">Delete</button>
                                     </div>
