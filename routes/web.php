@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Middleware\Roles;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -22,8 +23,11 @@ Route::middleware([
 ])->group(function () {
     Route::middleware(Roles::class . ':admin')->group(function () {
         Route::get('/admin', function () {
-            return Inertia::render('Admin');
+            return Inertia::render('Admin/Index');
         })->name('admin');
+
+        Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
+        Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
     });
 
     Route::resource('blogs', BlogController::class);

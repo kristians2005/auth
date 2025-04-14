@@ -52,8 +52,8 @@ const logout = () => {
                             <NavLink :href="route('blogs.my')" :active="route().current('blogs.my')">
                                 My Blogs
                             </NavLink>
-                            <NavLink v-if="$page.props.auth.user.role === 'admin'" :href="route('admin')" :active="route().current('admin')">
-                                Admin
+                            <NavLink v-if="$page.props.auth.user.role === 'admin'" :href="route('admin.users')" :active="route().current('admin.users')">
+                                User Management
                             </NavLink>
                         </div>
                     </div>
@@ -121,6 +121,9 @@ const logout = () => {
                     </ResponsiveNavLink>
                     <ResponsiveNavLink v-if="$page.props.auth.user.role === 'admin'" :href="route('admin')" :active="route().current('admin')">
                         Admin
+                    </ResponsiveNavLink>
+                    <ResponsiveNavLink v-if="$page.props.auth.user.role === 'admin'" :href="route('admin.users')" :active="route().current('admin.users')">
+                        User Management
                     </ResponsiveNavLink>
                 </div>
 
